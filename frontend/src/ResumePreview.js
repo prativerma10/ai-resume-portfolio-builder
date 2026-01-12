@@ -70,7 +70,7 @@ function ResumePreview({ resume }) {
   ))}
 </ul>
 
-<h3>Projects</h3>
+
 <ul>
   {(Array.isArray(resume.projects)
     ? resume.projects
@@ -79,6 +79,7 @@ function ResumePreview({ resume }) {
     <li key={index}>{project.trim()}</li>
   ))}
 </ul>
+
 
 
       <button onClick={downloadPDF}>Download PDF</button>
