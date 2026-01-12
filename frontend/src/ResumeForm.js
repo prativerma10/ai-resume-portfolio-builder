@@ -11,28 +11,34 @@ const [phone, setPhone] = useState("");
 const [linkedin, setLinkedin] = useState("");
 const [github, setGithub] = useState("");
 
-
-  const handleSubmit = async () => {
-    const response = await fetch("http://127.0.0.1:5000/generate-resume", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-  name,
-  skills,
-  projects,
-  job_role: jobRole,
-  experience,
-  email,
-  phone,
-  linkedin,
-  github,
-}),
-
-    });
+const handleSubmit = async () => {
+  try {
+    const response = await fetch(
+      "https://prativerma10.pythonanywhere.com/generate-resume",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          skills,
+          projects,
+          job_role: jobRole,
+          experience,
+          email,
+          phone,
+          linkedin,
+          github,
+        }),
+      }
+    );
 
     const data = await response.json();
     setResume(data);
-  };
+  } catch (error) {
+    console.error("Error generating resume:", error);
+  }
+};
+
 
   return (
    <div

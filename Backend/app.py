@@ -27,7 +27,6 @@ def download_zip():
     zip_path = create_resume_zip(data)
     return send_file(zip_path, as_attachment=True)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
 
 
