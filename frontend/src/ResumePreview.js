@@ -1,7 +1,8 @@
 function ResumePreview({ resume }) {
 
   const downloadPDF = async () => {
-    const response = await fetch("http://localhost:5000/download-pdf", {
+    const response = await fetch("https://prativerma10.pythonanywhere.com/download-pdf", {
+
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(resume),
@@ -17,7 +18,9 @@ function ResumePreview({ resume }) {
   };
 
   const downloadZIP = async () => {
-    const response = await fetch("http://localhost:5000/download-zip", {
+    const response = await fetch("https://prativerma10.pythonanywhere.com/download-zip", {
+
+
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(resume),
@@ -57,18 +60,23 @@ function ResumePreview({ resume }) {
 <p>{resume.experience}</p>
 
 
-      <h3>Skills</h3>
-      <ul>
-  {resume.skills.map((skill, index) => (
-    <li key={index}>{skill}</li>
+     <h3>Skills</h3>
+<ul>
+  {(Array.isArray(resume.skills)
+    ? resume.skills
+    : resume.skills?.split(",")
+  ).map((skill, index) => (
+    <li key={index}>{skill.trim()}</li>
   ))}
 </ul>
 
-
-      <h3>Projects</h3>
-    <ul>
-  {resume.projects.map((project, index) => (
-    <li key={index}>{project}</li>
+<h3>Projects</h3>
+<ul>
+  {(Array.isArray(resume.projects)
+    ? resume.projects
+    : resume.projects?.split(",")
+  ).map((project, index) => (
+    <li key={index}>{project.trim()}</li>
   ))}
 </ul>
 

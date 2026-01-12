@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaBuilding } from "react-icons/fa";
 
 function ResumeForm({ setResume }) {
   const [name, setName] = useState("");
@@ -17,7 +18,9 @@ const handleSubmit = async () => {
       "https://prativerma10.pythonanywhere.com/generate-resume",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           name,
           skills,
@@ -32,10 +35,17 @@ const handleSubmit = async () => {
       }
     );
 
+    if (!response.ok) {
+      throw new Error("API failed");
+    }
+
     const data = await response.json();
+    console.log("API RESPONSE:", data); // 👈 console me data dikhega
+
     setResume(data);
-  } catch (error) {
-    console.error("Error generating resume:", error);
+  } catch (err) {
+    console.error("ERROR:", err);
+    alert("Resume generation failed. Check console.");
   }
 };
 
